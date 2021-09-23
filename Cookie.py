@@ -1,6 +1,6 @@
 from structures.Window import Window
 from structures.Stores import CookieStore, GeneratorStore
-from tkinter import *
+from tkinter import Label
 
 window = Window('Cookie Clicker')
 cookies = CookieStore()
