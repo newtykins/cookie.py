@@ -9,28 +9,28 @@ Adds helper methods to increase and decrease the CPS value while automatically u
 class CookieStore(Store):
 	def __init__(self):
 		super().__init__('Cookies', 0)
-		self._cps = 1
-		self._cookieIncrementer = Timer(1, lambda: self.add(self._cps))
+		self.cps = 1
+		self._cookieIncrementer = Timer(1, lambda: self.add(self.cps))
 		self._cookieIncrementer.start()
 		self.cpsOutput = StringVar()
 		self.cpsOutput.set(self._cpsString())
 
 	def _cpsString(self):
-		return 'CPS: %i' % (self._cps)
+		return 'CPS: %i' % (self.cps)
 
 	"""
 	Restarts the incrementer with the latest CPS value.
 	"""
 	def _restartIncrementer(self):
 		self._cookieIncrementer.cancel()
-		self._cookieIncrementer = Timer(1, lambda: self.add(self._cps))
+		self._cookieIncrementer = Timer(1, lambda: self.add(self.cps))
 		self._cookieIncrementer.start()
 
 	"""
 	Adds to the CPS value and restarts the incrementer.
 	"""
 	def addCPS(self, amount: int = 1):
-		self._cps += amount
+		self.cps += amount
 		self.cpsOutput.set(self._cpsString())
 		self._restartIncrementer()
 
@@ -38,6 +38,6 @@ class CookieStore(Store):
 	Removes from the CPS value and restarts the incrementer.
 	"""
 	def removeCPS(self, amount: int = 1):
-		self._cps -= amount
+		self.cps -= amount
 		self.cpsOutput.set(self._cpsString())
 		self._restartIncrementer()
