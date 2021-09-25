@@ -1,4 +1,5 @@
-from structures.Stores import Store, CookieStore
+from structures.stores.Store import Store
+from structures.stores.CookieStore import CookieStore
 
 """
 A custom store to store data about generators.

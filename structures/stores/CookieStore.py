@@ -1,4 +1,4 @@
-from structures.Stores import Store
+from structures.stores.Store import Store
 from structures.Timer import Timer
 from tkinter import StringVar
 

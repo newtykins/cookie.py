@@ -1,8 +1,8 @@
-from structures.Stores import CookieStore, GeneratorStore
+from structures import stores
 
 class GameManager:
 	def __init__(self):
-		self.cookies = CookieStore()
+		self.cookies = stores.CookieStore()
 		self.generators = {
-			'grandmas': GeneratorStore(self.cookies, 'Grandmas', 10, 2)
+			'grandmas': stores.GeneratorStore(self.cookies, 'Grandmas', 10, 2)
 		}

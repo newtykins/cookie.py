@@ -39,23 +39,24 @@ class Menu(TkMenu):
 			data['generators'][key] = generator.quantity
 		# Ask the user where to save the data
 		saveFile = asksaveasfilename(filetypes=files, defaultextension=files)
-		print(data)
-		# Dump it
-		with open(saveFile, 'wb') as f:
-			pickle.dump(data, f)
+		if saveFile:
+			# Dump it
+			with open(saveFile, 'wb') as f:
+				pickle.dump(data, f)
 
 	"""
 	Load a game file!
 	"""
 	def loadGame(self):
 		saveFile = askopenfilename(filetypes=files, defaultextension=files) # Ask the user for the save file's location
-		self.newGame() # Ensure that the game's state is fresh
-		# Read the save file
-		with open(saveFile, 'rb') as f:
-			data = pickle.load(f)
-			self.gameManager.cookies.add(data['cookies'])
-			self.gameManager.cookies.addCPS(data['cps'] - 1)
-			for generatorName, amount in data['generators'].items():
-				generator = self.gameManager.generators[generatorName]
-				self.gameManager.cookies.removeCPS(generator._cpsPerUnit * amount) # Offset .add()'s default behaviour
-				generator.add(amount)
+		if saveFile:
+			self.newGame() # Ensure that the game's state is fresh
+			# Read the save file
+			with open(saveFile, 'rb') as f:
+				data = pickle.load(f)
+				self.gameManager.cookies.add(data['cookies'])
+				self.gameManager.cookies.addCPS(data['cps'] - 1)
+				for generatorName, amount in data['generators'].items():
+					generator = self.gameManager.generators[generatorName]
+					self.gameManager.cookies.removeCPS(generator._cpsPerUnit * amount) # Offset .add()'s default behaviour
+					generator.add(amount)

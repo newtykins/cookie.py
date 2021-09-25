@@ -1,12 +1,10 @@
-from structures.GameManager import GameManager
-from structures.Window import Window
-from structures.Menu import Menu
+from structures import GameManager, gui
 from tkinter import Label
 
 # Intitate the window, stores, and menu
-window = Window('Cookie Clicker', '750x750')
+window = gui.Window('Cookie Clicker', '750x750')
 manager = GameManager()
-menuBar = Menu(window, manager)
+menuBar = gui.Menu(window, manager)
 window.config(menu=menuBar)
 
 # Bind a label to the cookie store and if you click the label increment the CPS
