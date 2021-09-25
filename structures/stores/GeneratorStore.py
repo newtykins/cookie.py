@@ -12,14 +12,6 @@ class GeneratorStore(Store):
         self._baseCostPerUnit = cost
         self._cookieStore = cookieStore
 
-    """
-    Get the latest cost for a generator.
-    """
-    def getCost(self):
-        if self.quantity == 0:
-            return self._baseCostPerUnit
-        return round(self._baseCostPerUnit * (self.quantity + 2.5))
-
     def add(self, amount: int = 1):
         if amount > 0:
             super().add(amount)
@@ -31,10 +23,18 @@ class GeneratorStore(Store):
             self._cookieStore.removeCPS(self._cpsPerUnit * amount)
 
     """
+    Get the latest cost for a generator.
+    """
+    def cost(self):
+        if self.quantity == 0:
+            return self._baseCostPerUnit
+        return round(self._baseCostPerUnit * (self.quantity + 2.5))
+
+    """
     Buys a specific amount of generators. Returns True on success, False on failure.
     """
     def buy(self, amount: int = 1):
-        totalCost = self.getCost() * amount
+        totalCost = self.cost() * amount
         if self._cookieStore.quantity >= totalCost:
             self.add(amount)
             self._cookieStore.remove(totalCost)
