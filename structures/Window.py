@@ -1,10 +1,10 @@
 from tkinter import Tk
 
-class Window():
+class Window(Tk):
 	def __init__(self, title: str, geometry: str = '750x750'):
-		self.root = Tk()
-		self.root.title(title)
-		self.root.geometry(geometry)
+		super().__init__()
+		self.title(title)
+		self.geometry(geometry)
 
 	def start(self):
-		self.root.mainloop()
+		self.mainloop()
